@@ -1,0 +1,58 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background: url(../images/login_bg.jpg) no-repeat;
+    background-size: cover;
+}
+
+.loginAndRegBox {
+    width: 400px;
+    height: 310px;
+    background-color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.title-box {
+    height: 60px;
+    background: url(../images/login_title.png) no-repeat center;
+}
+
+.reg-box {
+    display: none;
+}
+
+/* form 表单区域 */
+.layui-form {
+    padding: 0 30px;
+}
+
+.layui-form .layui-btn {
+    width: 100%;
+    background-color: #1E9FFF;
+}
+
+.layui-form .link {
+    float: right;
+}
+
+.layui-form .username,
+.layui-form .password {
+    position: relative;
+}
+
+.layui-form input {
+    padding-left: 30px;
+}
+
+.layui-form .layui-icon {
+    position: absolute;
+    top: 50%;
+    left: 8px;
+    transform: translateY(-50%);
+}
