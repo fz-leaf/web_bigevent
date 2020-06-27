@@ -31,22 +31,27 @@ $(function () {
             username: $('#form-reg [name=username]').val(),
             password: $('#form-reg [name=password]').val()
         }
-        $.post('http://127.0.0.1:3007/api/reguser', data, function (res) {
-            if (res.status !== 0) return console.log(res.message);
+        $.post('/api/reguser', data, function (res) {
+            if (res.status !== 0) return layer.msg(res.message)
+            layer.msg('注册成功，青请登录！')
             $('#link_login').click()
             $('.tips').fadeIn(1000).fadeOut(1000).text('注册成功！请登录')
         })
     })
     // 2. 登录 请求
-    $('#form-login').on('submit', function (e) {
+    $('#form-login').submit(function (e) {
         // 阻止默认提交行为
-        e.preventDefault()
+        e.preventDefault();
+        console.log(123);
+
         $.ajax({
             method: 'POST',
-            url: 'http://127.0.0.1:3007/api/login',
+            url: '/api/login',
             data: $(this).serialize(),
             success: function (res) {
-                if (res.status !== 0) return console.log(res.message);
+                if (res.status !== 0) return layer.msg('登录失败！')
+                layer.msg('登录成功！')
+                // 存储 token
                 localStorage.setItem('token', res.token)
                 location.href = '/index.html'
             }
