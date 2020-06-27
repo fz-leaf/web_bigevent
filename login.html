@@ -19,7 +19,7 @@
         <div class="title-box"></div>
         <!-- 登录区域 -->
         <div class="login-box">
-            <form class="layui-form" action="">
+            <form class="layui-form" id="form-login">
                 <!-- 用户名 -->
                 <div class="layui-form-item username">
                     <i class="layui-icon layui-icon-username"></i>
@@ -34,7 +34,7 @@
                 </div>
                 <!-- 登录按钮 -->
                 <div class="layui-form-item">
-                    <button class="layui-btn" lay-submit lay-filter="formDemo">登录</button>
+                    <button class="layui-btn layui-btn-fluid" lay-submit>登录</button>
                 </div>
                 <div class="layui-form-item link">
                     <a href="javascript:;" id="link_reg">去注册账号</a>
@@ -43,8 +43,8 @@
         </div>
 
         <!-- 注册区域 -->
-        <div class="reg-box">
-            <form class="layui-form" action="">
+        <div class="reg-box hide">
+            <form class="layui-form" id="form-reg">
                 <!-- 用户名 -->
                 <div class="layui-form-item username">
                     <i class="layui-icon layui-icon-username"></i>
@@ -65,7 +65,7 @@
                 </div>
                 <!-- 登录按钮 -->
                 <div class="layui-form-item">
-                    <button class="layui-btn" lay-submit lay-filter="formDemo">注册</button>
+                    <button class="layui-btn layui-btn-fluid" lay-submit>注册</button>
                 </div>
                 <div class="layui-form-item link">
                     <a href="javascript:;" id="link_login">去登录</a>
@@ -73,6 +73,8 @@
             </form>
         </div>
     </div>
+    <!-- 登录注册成功提示 -->
+    <i class="hide tips">注册成功！请登录</i>
 
     <script src="./assets/lib/jquery.js"></script>
     <script src="./assets/lib/layui/layui.all.js"></script>
