@@ -51,8 +51,6 @@ $(function () {
                 if (status !== 0) return layer.msg(message)
                 layer.msg(message)
                 // 调用父页面的方法，重新渲染头象
-                console.log(window.parent);
-                debugger
                 window.parent.getUserInfo()
             }
         })
