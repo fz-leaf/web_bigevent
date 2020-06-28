@@ -1,45 +1,59 @@
 $(function () {
-    (function getUserInfo(params) {
-        $.ajax({
-            type: 'get',
-            url: '/my/userinfo',
-            // headers: {
-            //     Authorization: localStorage.getItem('token') || ''
-            // },
-            // beforeSend: function (xhr) {
-            //     xhr.setRequestHeader('Authorization', localStorage.getItem('token'))
-            // }
-            success: function (res) {
-                if (res.status !== 0) return layer.msg('获取用户信息失败！')
-                // 获取用户信息成功，调用 renderAvatar 渲染用户的头象，设置文本
-                renderAvatar(res.data)
-            },
-            
-        })
-    })();
+    getUserInfo()
 
-    // 定义 renderAvatar 函数
-    function renderAvatar(user) {
-        // 1. 获取用户名，设置欢迎文本
-        // const {
-        //     username,
-        //     user_pic,
-        //     nickname = '靓仔',
-        //     asd = 'qqq'
-        // } = user
-        // console.log(asd);
-        const name = user.nickname || user.username
-        $('#welcome').html(`欢迎&nbsp;&nbsp;${name}`)
+    // function getUserInfo() {
+    //     $.ajax({
+    //         type: 'get',
+    //         url: '/my/userinfo',
+    //         // headers: {
+    //         //     Authorization: localStorage.getItem('token') || ''
+    //         // },
+    //         // beforeSend: function (xhr) {
+    //         //     xhr.setRequestHeader('Authorization', localStorage.getItem('token'))
+    //         // }
+    //         success: function (res) {
+    //             if (res.status !== 0) return layer.msg('获取用户信息失败！')
+    //             // 获取用户信息成功，调用 renderAvatar 渲染用户的头象，设置文本
+    //             renderAvatar(res.data)
+    //         },
+    //         // complete: function (res) {
+    //         //     // console.log(res);
+    //         //     const {
+    //         //         status,
+    //         //         message
+    //         //     } = res.responseJSON
+    //         //     if (status !== 0 || message === '获取数据失败！') {
+    //         //         // 1. 强制清空 token 
+    //         //         localStorage.removeItem('token')
+    //         //         // 2. 跳转到 登录界面
+    //         //         location.href = './login.html'
+    //         //     }
+    //         // }
+    //     })
+    // };
 
-        // 2. 按需渲染用户头象
-        if (user.user_pic) {
-            // 获取到头象，渲染用户头象
-            $('.layui-nav-img').attr('src', user.user_pic).show().next().hide()
-        } else {
-            // 没有获取到头象，渲染文本头象
-            $('.text-avatar').text(name[0].toUpperCase()).prev().hide()
-        }
-    }
+    // // 定义 renderAvatar 函数
+    // function renderAvatar(user) {
+    //     // 1. 获取用户名，设置欢迎文本
+    //     // const {
+    //     //     username,
+    //     //     user_pic,
+    //     //     nickname = '靓仔',
+    //     //     asd = 'qqq'
+    //     // } = user
+    //     // console.log(asd);
+    //     const name = user.nickname || user.username
+    //     $('#welcome').html(`欢迎&nbsp;&nbsp;${name}`)
+
+    //     // 2. 按需渲染用户头象
+    //     if (user.user_pic) {
+    //         // 获取到头象，渲染用户头象
+    //         $('.layui-nav-img').attr('src', user.user_pic).show().next().hide()
+    //     } else {
+    //         // 没有获取到头象，渲染文本头象
+    //         $('.text-avatar').text(name[0].toUpperCase()).prev().hide()
+    //     }
+    // }
 
     // 退出功能
     $('#btnLogout').on('click', function () {
@@ -57,3 +71,57 @@ $(function () {
         });
     })
 })
+
+function getUserInfo() {
+    $.ajax({
+        type: 'get',
+        url: '/my/userinfo',
+        // headers: {
+        //     Authorization: localStorage.getItem('token') || ''
+        // },
+        // beforeSend: function (xhr) {
+        //     xhr.setRequestHeader('Authorization', localStorage.getItem('token'))
+        // }
+        success: function (res) {
+            if (res.status !== 0) return layer.msg('获取用户信息失败！')
+            // 获取用户信息成功，调用 renderAvatar 渲染用户的头象，设置文本
+            renderAvatar(res.data)
+        },
+        // complete: function (res) {
+        //     // console.log(res);
+        //     const {
+        //         status,
+        //         message
+        //     } = res.responseJSON
+        //     if (status !== 0 || message === '获取数据失败！') {
+        //         // 1. 强制清空 token 
+        //         localStorage.removeItem('token')
+        //         // 2. 跳转到 登录界面
+        //         location.href = './login.html'
+        //     }
+        // }
+    })
+};
+
+// 定义 renderAvatar 函数
+function renderAvatar(user) {
+    // 1. 获取用户名，设置欢迎文本
+    // const {
+    //     username,
+    //     user_pic,
+    //     nickname = '靓仔',
+    //     asd = 'qqq'
+    // } = user
+    // console.log(asd);
+    const name = user.nickname || user.username
+    $('#welcome').html(`欢迎&nbsp;&nbsp;${name}`)
+
+    // 2. 按需渲染用户头象
+    if (user.user_pic) {
+        // 获取到头象，渲染用户头象
+        $('.layui-nav-img').attr('src', user.user_pic).show().next().hide()
+    } else {
+        // 没有获取到头象，渲染文本头象
+        $('.text-avatar').text(name[0].toUpperCase()).prev().hide()
+    }
+}

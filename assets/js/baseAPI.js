@@ -11,7 +11,7 @@ $.ajaxPrefilter(function (options) {
         }
     }
 
-    // 添加 complete 
+    // 添加 complete
     options.complete = function (res) {
         // console.log(res);
         const {
