@@ -2,6 +2,7 @@ $(function () {
     // 1. 实现裁剪预览功能
     // 1.1 获取裁剪区域的 DOM 元素
     const $image = $('#image')
+
     // 1.2 配置选项
     const options = {
         // 纵横比
@@ -21,7 +22,6 @@ $(function () {
     // 更换裁剪区域图片
     // 给文件选择框绑定 change 事件，选择文件就会触发事件
     $('#file').on('change', function (e) {
-        console.log(e.target.files);
         // 获取文件
         let filelist = e.target.files
         if (filelist.length === 0) {
@@ -39,10 +39,16 @@ $(function () {
 
         // 将裁剪的图片上传到数据库
         let dataURL = $image.cropper('getCroppedCanvas', {
-            // 创建一个 Canvas 画布
-            width: 100,
-            height: 100
-        }).toDataURL('image/png')
+                // 创建一个 Canvas 画布
+                width: 100,
+                height: 100
+            })
+            .toDataURL('image/png')
+        // debugger
+
+        console.log(dataURL);
+
+        //
 
         // 发起 Ajax 请求
         $.ajax({
