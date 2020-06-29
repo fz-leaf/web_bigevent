@@ -1,0 +1,19 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #f7f7f7;
+    padding: 15px;
+}
+
+#form-select {
+    display: flex;
+    justify-content: flex-start;
+}
+
+#form-select .layui-form-item {
+    margin-right: 20px;
+}

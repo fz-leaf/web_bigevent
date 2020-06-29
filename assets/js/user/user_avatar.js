@@ -36,19 +36,16 @@ $(function () {
         $image.cropper('destroy') // 销毁旧的裁剪区域
             .attr('src', imgURL) // 重新设置图片路径
             .cropper(options) // 重新初始化裁剪路径
+    })
 
+    $('#btnConfirm').on('click', function (e) {
+        e.preventDefault()
         // 将裁剪的图片上传到数据库
         let dataURL = $image.cropper('getCroppedCanvas', {
-                // 创建一个 Canvas 画布
-                width: 100,
-                height: 100
-            })
-            .toDataURL('image/png')
-        // debugger
-
-        console.log(dataURL);
-
-        //
+            // 创建一个 Canvas 画布
+            width: 100,
+            height: 100
+        }).toDataURL('image/png')
 
         // 发起 Ajax 请求
         $.ajax({
