@@ -14,7 +14,7 @@
     <div class="layui-card">
         <div class="layui-card-header">写文章</div>
         <div class="layui-card-body">
-            <form class="layui-form" action="">
+            <form class="layui-form" id="formPub">
                 <div class="layui-form-item">
                     <label class="layui-form-label">文章标题</label>
                     <div class="layui-input-block">
@@ -51,15 +51,15 @@
                                     <div class="img-preview w100"></div>
                                     <!-- 隐藏的文件选择框 -->
                                     <input type="file" id="coverFile" style="display: none;"
-                                        accept="image/ng,image/jpeg,image/gif">
-                                    <button class="layui-btn layui-btn-danger" id="btnChooseImage">选择封面</button>
+                                        accept="image/png,image/jpeg,image/gif" />
+                                    <button type="button" class="layui-btn layui-btn-danger"
+                                        id="btnChooseImage">选择封面</button>
                                 </div>
                             </div>
                             <!-- 第二行按钮区域 -->
                             <div class="row2">
-                                <input id="file" type="file" accept="image/png,image/jpeg">
-                                <button id="btnSave1" class="layui-btn">发布</button>
-                                <button class="layui-btn layui-btn-primary" id="btnSave2">存为草稿</button>
+                                <button lay-submit class="layui-btn">发布</button>
+                                <button class="layui-btn layui-btn-primary" id="btnSave2" lay-submit>存为草稿</button>
                             </div>
                         </div>
                     </div>
@@ -72,7 +72,7 @@
     <script type="text/html" id="tem-cate">
         <option value="">请选择文章类别</option>
         {{each data}}
-        <option value="{{$value.Id}}">{{$value.name}}</option>
+        <option value="{{$value.id}}">{{$value.name}}</option>
         {{/each}}
     </script>
 

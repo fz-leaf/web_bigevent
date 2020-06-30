@@ -60,10 +60,53 @@ $(function () {
 
     // 定义 state 的值
     let art_state = '已发布'
-    $('#btnSave1').on('click', function () {
-        art_state = '已发布'
-    })
     $('#btnSave2').on('click', function () {
         art_state = '草稿'
     })
+
+    // 给表单绑定提交事件
+    $('#formPub').on('submit', function (e) {
+        // 阻止表单默认提交行为
+        e.preventDefault()
+        // 快速创建一个 FormData 对象
+        let fd = new FormData($(this)[0])
+        // 把 state 值添加到 fd 中
+        fd.append('state', art_state)
+
+        // 将文件输出为一个对象，添加到 fd 中
+        $image.cropper('getCroppedCanvas', {
+            // 创建一个 Canvas 画布
+            width: 400,
+            height: 280
+        }).toBlob(function (blob) {
+            // 将 Canvas 画布上的内容，转化为文件对象
+            // 得到文件对象后，进行后续的操作
+            fd.append('cover_img', blob)
+            // 调用 pubArticle() 函数，发起 ajax 请求发布文章
+
+            pubArticle(fd)
+        })
+    })
+
+    // 定义 pubArticle 方法
+    function pubArticle(fd) {
+        $.ajax({
+            type: 'post',
+            url: '/my/article/add',
+            data: fd,
+            // jQuery 提交 FormData 数据必须配置以下两项
+            contentType: false,
+            processData: false,
+            success: function (res) {
+                const {
+                    status,
+                    message
+                } = res
+                if (status !== 0) return layer.msg(message)
+                layer.msg(message)
+                // 发布文章成功后，跳转到文章列表页面
+                location.href = '/Event_code/article/art_list.html'
+            }
+        })
+    }
 })
