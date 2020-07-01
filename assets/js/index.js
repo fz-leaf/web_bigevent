@@ -65,7 +65,6 @@ $(function () {
             // 删除 token 退回到 登录界面
             localStorage.removeItem('token')
             location.href = '/Event_code/login.html'
-
             // 关闭 confim 确认框
             layer.close(index);
         });

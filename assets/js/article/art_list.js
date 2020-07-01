@@ -93,8 +93,6 @@ $(function () {
                 // 可以通过 first 的值，来判断是通过哪种方式，触发的 jump 回调
                 // 如果 first 的值为 true，证明是方式2触发的
                 // 否则就是方式1触发的
-                console.log(first)
-                console.log(obj.curr)
                 // 把最新的页码值，赋值到 q 这个查询参数对象中
                 q.pagenum = obj.curr
                 // 把最新的条目数，赋值到 q 这个查询参数对象的 pagesize 属性中
@@ -134,5 +132,25 @@ $(function () {
             })
             layer.close(index);
         });
+    })
+
+    // 编辑文章功能
+    // 给 btnEdit 按钮注册点击事件委托
+    let index
+    $('tbody').on('click', '#btnEdit', function () {
+        // 2. 调用 layer.open 方法调出弹出层
+        index = layer.open({
+            type: 1,
+            title: '修改文章',
+            area: ['500px', '350px'],
+            content: $('#contentEdit').html()
+        })
+        // 发起 ajax 请求数据，渲染弹出层的表单
+        const id = $(this).attr('data-id')
+        $.ajax({
+            type: 'GET',
+            url: `/my/article/getArticle/${id}`,
+
+        })
     })
 })

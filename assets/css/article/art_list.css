@@ -17,3 +17,11 @@ body {
 #form-select .layui-form-item {
     margin-right: 20px;
 }
+
+#contentEditForm {
+    margin-top: 30px;
+}
+
+#contentEditForm .layui-input {
+    width: 350px;
+}

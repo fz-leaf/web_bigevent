@@ -79,11 +79,11 @@ $(function () {
             width: 400,
             height: 280
         }).toBlob(function (blob) {
+            debugger
             // 将 Canvas 画布上的内容，转化为文件对象
             // 得到文件对象后，进行后续的操作
             fd.append('cover_img', blob)
             // 调用 pubArticle() 函数，发起 ajax 请求发布文章
-
             pubArticle(fd)
         })
     })
