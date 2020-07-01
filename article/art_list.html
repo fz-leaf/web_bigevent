@@ -13,7 +13,7 @@
     <div class="layui-card">
         <div class="layui-card-header">文章列表</div>
         <div class="layui-card-body">
-            <form class="layui-form" id="form-select">
+            <form class="layui-form" id="form-select" lay-filter="formFilter">
                 <div class="layui-form-item">
                     <select id="cate_select" name="cate_id" lay-verify="required"></select>
                 </div>
@@ -62,7 +62,7 @@
             <td>
                 <!-- 给编辑按钮 绑定自定义属性 data-id 用来存储每条数据的 id  -->
                 <button id="btnEdit" type="button" class="layui-btn layui-btn-sm" data-id={{$value.id}}>编辑</button>
-                <button id="btnDelete" type="button" class="layui-btn layui-btn-danger layui-btn-sm"
+                <button type="button" class="layui-btn layui-btn-danger layui-btn-sm btnDelete"
                     data-id={{$value.id}}>删除</button>
             </td>
         </tr>
@@ -106,13 +106,13 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">状态</label>
                 <div class="layui-input-block">
-                    <input type="text" name="title" required lay-verify="required" placeholder="请输入状态"
+                    <input type="text" name="state" required lay-verify="required" placeholder="请输入状态"
                         autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <div class="layui-input-block">
-                    <button class="layui-btn" lay-submit lay-filter="formDemo">确认修改</button>
+                    <button id="btnUpdate" class="layui-btn" lay-submit>确认修改</button>
                 </div>
             </div>
         </form>

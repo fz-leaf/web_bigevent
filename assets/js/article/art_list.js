@@ -74,6 +74,13 @@ $(function () {
         // 为查询参数对象 q 中u对应的属性赋值
         q.cate_id = cate_id
         q.state = state
+
+        // 扩展运算符
+        // const formObj = form.val('formFilter')
+        // inputParams = {
+        //     ...q,
+        //     ...formObj
+        // }
         // 重新渲染表格
         initTable()
     })
@@ -107,7 +114,10 @@ $(function () {
 
     // 删除功能
     // 给 btnDelete 删除按钮注册事件委托
-    $('tbody').on('click', '#btnDelete', function () {
+    $('tbody').on('click', '.btnDelete', function () {
+        // 获取页面中 #btnDelete 按钮的个数
+        let btnNum = $('.btnDelete').length
+
         const id = $(this).attr('data-id')
         // 调用 layer.confirm() 调出确认框
         layer.confirm('是否确认删除?', {
@@ -127,6 +137,11 @@ $(function () {
                     if (status !== 0) return layer.msg(message)
                     layer.msg(message)
                     // 删除成功，调用 initTable 重新渲染文章分类
+                    // 判断 删除按钮个数是否为1
+                    if (btnNum === 1) {
+                        // btnNum 最小为1
+                        q.pagenum = q.pagenum === 1 ? 1 : q.pagenum - 1
+                    }
                     initTable()
                 }
             })
@@ -135,7 +150,7 @@ $(function () {
     })
 
     // 编辑文章功能
-    // 给 btnEdit 按钮注册点击事件委托
+    // 1. 给 btnEdit 按钮注册点击事件委托
     let index
     $('tbody').on('click', '#btnEdit', function () {
         // 2. 调用 layer.open 方法调出弹出层
@@ -145,12 +160,57 @@ $(function () {
             area: ['500px', '350px'],
             content: $('#contentEdit').html()
         })
-        // 发起 ajax 请求数据，渲染弹出层的表单
+        // 2. 发起 ajax 请求数据，渲染弹出层的表单
         const id = $(this).attr('data-id')
         $.ajax({
             type: 'GET',
             url: `/my/article/getArticle/${id}`,
-
+            data: {
+                id
+            },
+            success: function (res) {
+                const {
+                    status,
+                    message,
+                    data
+                } = res
+                if (status !== 0) return layer.msg(message)
+                // 调用 form.val() 方法将数据渲染到弹出框的表单里 
+                form.val('editForm', data)
+            }
         })
+    })
+
+    // 3. 给确定按钮注册事件委托点击事件，更新文章数据
+    $('body').on('submit', '#contentEditForm', function (e) {
+        // 阻止默认提交行为
+        e.preventDefault()
+        // 获取表单数据
+        // let data = form.val('editForm')
+        // delete data.cate_name
+
+        // form.serialize() 方法
+        // 有 disabled 属性 的表单， serialize() 不会获取到相应的 value 值
+        let data = $(this).serialize()
+
+        // 发起 ajax 请求，更新文章数据
+        $.ajax({
+            type: 'POST',
+            url: '/my/article/update',
+            data,
+            success: function (res) {
+                const {
+                    status,
+                    message
+                } = res
+                if (status !== 0) return layer.msg(message)
+                layer.msg(message)
+                // 更新成功，调用 initTable 重新渲染文章列表
+                initTable()
+                // 关闭对应弹出层
+                layer.close(index)
+            }
+        })
+
     })
 })
